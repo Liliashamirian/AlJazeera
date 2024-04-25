@@ -10,5 +10,9 @@ class LivePage extends Page {
         return $('#liveStreamPlayerHelpButton');
     }
 
+    open() {
+        return super.open('live');
+    }
+
 }
 module.exports = new LivePage();

@@ -3,13 +3,18 @@ const { expect, $ } = require('chai')
 const HomePage = require('../pageobjects/home.page');
 const livePage = require('../pageobjects/live.page');
 
-Given(/^I open the home page with "([^"]*)" browser size$/, { timeout: 2 * 60000 }, async (device) => {
+const pages = {
+    home: HomePage,
+    live: livePage
+}
+
+Given(/^I am on the (\w+) page with ([^"]*) browser size$/, async (page, device) => {
     if (device === 'mobile') {
         await browser.setWindowSize(375, 812);
     } else {
         await browser.setWindowSize(1920, 1080);
     }
-    await browser.url('https://www.aljazeera.com/');
+    await pages[page].open()
 });
 
 Then(/^I should see the Most Read section$/, { timeout: 2 * 60000 }, async () => {
@@ -25,10 +30,6 @@ Then(/^I should see (\d+) posts in the Most Read section$/, { timeout: 2 * 60000
 Then(/^the Most Read section should not be displayed$/, async () => {
     const isMostReadVisible = await HomePage.mostReadSectionTitle.isExisting()
     expect(isMostReadVisible).to.equal(false);
-});
-
-Given(/^I open the live page$/, { timeout: 2 * 60000 }, async () => {
-    await browser.url('https://aljazeera.com/live')
 });
 
 When(/^I press the TAB key after clicking on the empty space next to the website logo$/, async () => {

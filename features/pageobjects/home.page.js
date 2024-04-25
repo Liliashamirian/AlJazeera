@@ -37,6 +37,10 @@ class HomePage extends Page {
         const posts = await this.mostReadSectionList;
         return posts.length;
     }
+
+    open() {
+        return super.open();
+    }
 }
 
 module.exports = new HomePage();
