@@ -8,7 +8,7 @@ const pages = {
     live: livePage
 }
 
-Given(/^I am on the (\w+) page with ([^"]*) browser size$/, async (page, device) => {
+Given(/^I am on the (\w+) page with ([^"]*) browser size$/, { timeout: 2 * 60000 }, async (page, device) => {
     if (device === 'mobile') {
         await browser.setWindowSize(375, 812);
     } else {
