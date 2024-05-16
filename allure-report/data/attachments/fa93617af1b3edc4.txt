@@ -1,4 +1,0 @@
-{
-  "using": "css selector",
-  "value": "#vjs_video_3_html5_api"
-}
